@@ -22,6 +22,13 @@ import {
 import { mens } from "../../../data/mens";
 import ProductCard from "./ProductCard";
 import { filters, singleFilter } from "./FilterData";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
 const sortOptions = [
   { name: "Price: Low to High", href: "#", current: false },
@@ -290,45 +297,53 @@ export default function Product() {
                     as="div"
                     className="border-b border-gray-200 py-6"
                   >
-                    <h3 className="-my-3 flow-root">
-                      <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
-                        <span className="font-medium text-gray-900">
-                          {section.name}
-                        </span>
-                        <span className="ml-6 flex items-center">
-                          <PlusIcon
-                            aria-hidden="true"
-                            className="h-5 w-5 group-data-[open]:hidden"
-                          />
-                          <MinusIcon
-                            aria-hidden="true"
-                            className="h-5 w-5 [.group:not([data-open])_&]:hidden"
-                          />
-                        </span>
-                      </DisclosureButton>
-                    </h3>
-                    <DisclosurePanel className="pt-6">
-                      <div className="space-y-4">
-                        {section.options.map((option, optionIdx) => (
-                          <div key={option.value} className="flex items-center">
-                            <input
-                              defaultValue={option.value}
-                              defaultChecked={option.checked}
-                              id={`filter-${section.id}-${optionIdx}`}
-                              name={`${section.id}[]`}
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            />
-                            <label
-                              htmlFor={`filter-${section.id}-${optionIdx}`}
-                              className="ml-3 text-sm text-gray-600"
+                    {({ open }) => (
+                      <FormControl>
+                        <h3 className="-my-3 flow-root">
+                          <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                            <span className="font-medium "></span>
+                            <FormLabel
+                              className="text-gray-900"
+                              id="demo-radio-buttons-group-label"
                             >
-                              {option.label}
-                            </label>
+                              {section.name}
+                            </FormLabel>
+                            <span className="ml-6 flex items-center">
+                              {open ? (
+                                <MinusIcon
+                                  aria-hidden="true"
+                                  className="h-5 w-5 [.group:not([data-open])_&]:hidden"
+                                />
+                              ) : (
+                                <PlusIcon
+                                  aria-hidden="true"
+                                  className="h-5 w-5 group-data-[open]:hidden"
+                                />
+                              )}
+                            </span>
+                          </DisclosureButton>
+                        </h3>
+                        <DisclosurePanel className="pt-6">
+                          <div className="space-y-4">
+                            <RadioGroup
+                              aria-labelledby="demo-radio-buttons-group-label"
+                              defaultValue="female"
+                              name="radio-buttons-group"
+                            >
+                              {section.options.map((option, optionIdx) => (
+                                <>
+                                  <FormControlLabel
+                                    value={option.id}
+                                    control={<Radio />}
+                                    label={option.label}
+                                  />
+                                </>
+                              ))}
+                            </RadioGroup>
                           </div>
-                        ))}
-                      </div>
-                    </DisclosurePanel>
+                        </DisclosurePanel>
+                      </FormControl>
+                    )}
                   </Disclosure>
                 ))}
               </form>
