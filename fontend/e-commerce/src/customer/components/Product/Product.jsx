@@ -61,15 +61,19 @@ export default function Product() {
       filterValue.push(value);
     }
     if (filterValue.length > 0) {
-      console.log("sectionId: ", sectionId);
-      console.log("filtervalue:", filterValue);
-
       searchParamms.set(sectionId, filterValue.join(","));
-      const query = searchParamms.toString();
-      navigate({ search: `?${query}` });
-    } else {
-      navigate({ search: `?${searchParamms.toString()}` });
     }
+    const query = searchParamms.toString();
+    navigate({ search: `?${query}` });
+  };
+
+  const handleRadioFilterChange = (e, sectionId) => {
+    const searchParamms = new URLSearchParams(location.search);
+
+    searchParamms.set(sectionId, e.target.value);
+
+    const query = searchParamms.toString();
+    navigate({ search: `?${query}` });
   };
 
   return (
@@ -278,7 +282,10 @@ export default function Product() {
                                   {section.options.map((option, optionIdx) => (
                                     <>
                                       <FormControlLabel
-                                        value={option.id}
+                                        onChange={(e) =>
+                                          handleRadioFilterChange(e, section.id)
+                                        }
+                                        value={option.value}
                                         control={<Radio />}
                                         label={option.label}
                                       />
