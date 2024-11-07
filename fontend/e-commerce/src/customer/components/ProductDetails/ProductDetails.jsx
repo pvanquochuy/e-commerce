@@ -25,6 +25,9 @@ import { useState } from "react";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { Rating, Button, Grid, Box, LinearProgress } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
+import "../../../data/mens.js";
+import { mens } from "../../../data/mens.js";
+import HomeSectionCard from "../HomeSectionCard/HomeSectionCard.jsx";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -413,6 +416,16 @@ export default function ProductDetails() {
                 </Box>
               </Grid>
             </Grid>
+          </div>
+        </section>
+
+        {/* similer productws */}
+        <section className="pt-10">
+          <h1 className="py-5 text-xl font-bold">Sản Phẩm Tương Tự</h1>
+          <div className="flex flex-wrap space-y-5">
+            {mens.map((item) => (
+              <HomeSectionCard product={item} />
+            ))}
           </div>
         </section>
       </div>
