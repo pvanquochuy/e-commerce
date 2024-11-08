@@ -34,13 +34,13 @@ const CartItem = () => {
             <RemoveCircleOutlineIcon />
           </IconButton>
           <span className="py-1 px-7 border rounded-sm">3</span>
-          <IconButton>
+          <IconButton sx={{ color: "RGB(145 85 253)" }}>
             <AddCircleOutlineIcon />
           </IconButton>
         </div>
 
         <div>
-          <Button>Xóa</Button>
+          <Button sx={{ color: "RGB(145 85 253)" }}>Xóa</Button>
         </div>
       </div>
     </div>
