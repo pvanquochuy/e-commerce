@@ -419,7 +419,7 @@ export default function ProductDetails() {
           </div>
         </section>
 
-        {/* similer productws */}
+        {/* similar productws */}
         <section className="pt-10">
           <h1 className="py-5 text-xl font-bold">Sản Phẩm Tương Tự</h1>
           <div className="flex flex-wrap space-y-5">

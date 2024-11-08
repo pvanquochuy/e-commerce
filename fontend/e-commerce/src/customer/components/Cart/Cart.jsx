@@ -46,7 +46,7 @@ const Cart = () => {
                 px: "2.5rem",
                 py: ".7rem",
                 color: "black",
-                bgcolor: "blue",
+                bgcolor: "RGB(145 85 253)",
               }}
             >
               Thanh Toan
