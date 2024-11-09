@@ -1,7 +1,7 @@
 import React from "react";
-import AddressCard from "../AdressCard/AddressCard";
 import { Button } from "@mui/material";
 import CartItem from "../Cart/CartItem";
+import AddressCard from "../AddressCard/AddressCard";
 
 const OrderSummary = () => {
   return (
