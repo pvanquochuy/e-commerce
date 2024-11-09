@@ -410,7 +410,9 @@ export default function Navigation() {
                           Profile
                         </MenuItem>
 
-                        <MenuItem>My Orders</MenuItem>
+                        <MenuItem onClick={() => navigate("/account/order")}>
+                          Giỏ Hàng
+                        </MenuItem>
 
                         <MenuItem>Logout</MenuItem>
                       </Menu>

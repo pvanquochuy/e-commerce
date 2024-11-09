@@ -1,10 +1,15 @@
 import { Grid } from "@mui/system";
 import React from "react";
 import AdjustIcon from "@mui/icons-material/Adjust";
+import { useNavigate } from "react-router-dom";
 
 const OrderCard = () => {
+  const navigate = useNavigate();
   return (
-    <div className="p-5 shadow-md shadow-black hover:shadow-2xl">
+    <div
+      onClick={() => navigate(`/account/order/${5}`)}
+      className="p-5 shadow-md shadow-black hover:shadow-2xl cursor-pointer"
+    >
       <Grid container spacing={2} sx={{ justifyContent: "space-around" }}>
         <Grid item xs={6}>
           <div className="flex cursor-pointer">

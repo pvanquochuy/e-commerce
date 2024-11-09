@@ -28,6 +28,7 @@ import ProductReviewCard from "./ProductReviewCard";
 import "../../../data/mens.js";
 import { mens } from "../../../data/mens.js";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard.jsx";
+import { useNavigate } from "react-router-dom";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -88,6 +89,11 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    navigate("/cart");
+  };
 
   return (
     <div className="bg-white lg:px-20">
@@ -268,7 +274,7 @@ export default function ProductDetails() {
                 </div>
 
                 <Button
-                  color="secondary"
+                  onClick={handleAddToCart}
                   varitant="contained"
                   sx={{ px: "2rem", py: "1rem", bgcolor: "#9155fd" }}
                 >
