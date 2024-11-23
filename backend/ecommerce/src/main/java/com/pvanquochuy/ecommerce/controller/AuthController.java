@@ -68,7 +68,7 @@ public class AuthController {
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest){
         String username = loginRequest.getEmail();
         String password = loginRequest.getPassword();
@@ -79,7 +79,7 @@ public class AuthController {
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwt(token);
-        authResponse.setMessage("Signin success");
+        authResponse.setMessage("Login success");
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     }
 

@@ -1,5 +1,6 @@
 package com.pvanquochuy.ecommerce.service;
 
+import com.pvanquochuy.ecommerce.exception.UserException;
 import com.pvanquochuy.ecommerce.model.User;
 import com.pvanquochuy.ecommerce.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -28,5 +29,15 @@ public class UserServiceImpl implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+    }
+
+    @Override
+    public User findUserByLongId(Long userId) throws UserException {
+        return null;
+    }
+
+    @Override
+    public User findUserProfileByJwt(String jwt) throws UserException {
+        return null;
     }
 }
