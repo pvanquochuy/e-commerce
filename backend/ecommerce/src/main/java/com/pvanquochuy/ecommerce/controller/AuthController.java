@@ -5,7 +5,7 @@ import com.pvanquochuy.ecommerce.model.User;
 import com.pvanquochuy.ecommerce.repository.UserRepository;
 import com.pvanquochuy.ecommerce.request.LoginRequest;
 import com.pvanquochuy.ecommerce.response.AuthResponse;
-import com.pvanquochuy.ecommerce.service.UserServiceImpl;
+import com.pvanquochuy.ecommerce.service.CustomeUserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,10 +26,10 @@ public class AuthController {
     private UserRepository userRepository;
     private JwtProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
-    private UserServiceImpl userService;
+    private CustomeUserServiceImpl userService;
 
 
-    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, UserServiceImpl userService) {
+    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomeUserServiceImpl userService) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
         this.passwordEncoder = passwordEncoder;
