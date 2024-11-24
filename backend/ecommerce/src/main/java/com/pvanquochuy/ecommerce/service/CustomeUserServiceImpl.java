@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CustomeUserServiceImpl implements UserService, UserDetailsService {
+public class CustomeUserServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
 
     public CustomeUserServiceImpl(UserRepository userRepository) {
@@ -31,13 +31,5 @@ public class CustomeUserServiceImpl implements UserService, UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
-    @Override
-    public User findUserByLongId(Long userId) throws UserException {
-        return null;
-    }
 
-    @Override
-    public User findUserProfileByJwt(String jwt) throws UserException {
-        return null;
-    }
 }
