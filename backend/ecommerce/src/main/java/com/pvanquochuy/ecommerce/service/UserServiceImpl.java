@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findUserByLongId(Long userId) throws UserException {
+    public User findUserById(Long userId) throws UserException {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()) {
             return user.get();
