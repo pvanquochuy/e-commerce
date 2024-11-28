@@ -1,23 +1,72 @@
+import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+
+    const userData = {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+
+    console.log("userData:", userData);
+  };
   return (
     <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="email"
+              name="email"
+              label="Email"
+              fullWidth
+              autoComplete="email"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="password"
+              name="password"
+              label="password"
+              fullWidth
+              autoComplete="Password"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              className="bg-[#9155FD] w-full"
+              type="submmit"
+              variant="contained"
+              size="large"
+              sx={{ padding: ".8rem 0", bgcolor: "#9155FD" }}
+            >
+              Đăng Nhập
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+
+      <div className="flex justify-center flex-col items-center">
+        <div className="py-3 flex item-center">
+          <p>Bạn chưa có tài khoản?</p>
+          <Button
+            onClick={() => navigate("/register")}
+            className="ml-5"
+            size="small"
+          >
+            Đăng kí
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
