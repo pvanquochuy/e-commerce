@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    @GetMapping("/product")
+    @GetMapping("/products")
     public ResponseEntity<Page<Product>> findProductByCategoryHandle(
             @RequestParam String category, @RequestParam List<String> color, @RequestParam List<String> size,
             @RequestParam Integer minPrice, @RequestParam Integer maxPrice, @RequestParam Integer minDiscount,

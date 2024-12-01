@@ -39,7 +39,7 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        error: null
+        error: null,
       };
 
     case GET_CART_SUCCESS:
@@ -53,34 +53,32 @@ export const cartReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: action.payload };
     case REMOVE_CART_ITEM_REQUEST:
     case UPDATE_CART_ITEM_REQUEST:
-        return{
-            ...state,
-            loading:true,
-            error: null
-        }
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
     case REMOVE_CART_ITEM_SUCCESS:
-        return{
-            ...state,
-            cartItems: state.cartItems.filter(
-                (item)=>item.id !== action.payload
-            ),
-            loading: false
-        }
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+        loading: false,
+      };
     case UPDATE_CART_ITEM_SUCCESS:
-        return{
-            ...state,
-            cartItems: state.cartItems.map((item)=>
-                item.id == action.payload.id ? action.payload : item
-            ),
-            false,
-        }
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item) =>
+          item.id == action.payload.id ? action.payload : item
+        ),
+        loading: false,
+      };
     case REMOVE_CART_ITEM_FAILURE:
     case UPDATE_CART_ITEM_FAILURE:
-        return{
-            ...state,
-            error: action.payload,
-            loading: false
-        }
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

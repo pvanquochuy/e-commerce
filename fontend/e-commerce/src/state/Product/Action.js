@@ -8,13 +8,13 @@ import {
   FIND_PRODUCTS_SUCCESS,
 } from "./ActionType";
 
-export const findProducts = (reqData) => (dispatch) => {
+export const findProducts = (reqData) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCTS_REQUEST });
 
-  const [
+  const {
     colors,
     sizes,
-    minPrices,
+    minPrice,
     maxPrice,
     minDiscount,
     category,
@@ -22,24 +22,25 @@ export const findProducts = (reqData) => (dispatch) => {
     sort,
     pageNumber,
     pageSize,
-  ] = reqData;
+  } = reqData;
+
   try {
     const { data } =
-      api.get(`/api/products/color=${colors}&size=${sizes}&minPrice=&${minPrices}&
+      await api.get(`/api/products?color=${colors}&size=${sizes}&minPrice=&${minPrice}&
         maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
-
+    console.log("product data ", data);
     dispatch({ type: FIND_PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: FIND_PRODUCTS_FAILURE, payload: error.message });
   }
 };
 
-export const findProductsById = (reqData) => (dispatch) => {
+export const findProductsById = (reqData) => async (dispatch) => {
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
   const { productId } = reqData;
 
   try {
-    const { data } = api.get(`/api/products/id/${productId}`);
+    const { data } = await api.get(`/api/products/id/${productId}`);
 
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
