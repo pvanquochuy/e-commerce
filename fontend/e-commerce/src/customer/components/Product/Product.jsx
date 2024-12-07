@@ -58,7 +58,7 @@ export default function Product() {
   const priceValue = searchParams.get("price");
   const discount = searchParams.get("discount");
   const sortValue = searchParams.get("sort");
-  const pageNumber = searchParams.get("page");
+  const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
 
   const handleFilter = (value, sectionId) => {
