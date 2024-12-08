@@ -31,6 +31,7 @@ import HomeSectionCard from "../HomeSectionCard/HomeSectionCard.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findProductsById } from "../../../state/Product/Action.js";
+import { addItemToCart } from "../../../state/Cart/Action.js";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -98,6 +99,9 @@ export default function ProductDetails() {
   console.log("-----", params.productId);
 
   const handleAddToCart = () => {
+    const data = { productId: params.productId, size: selectedSize.name };
+    console.log("data _ ", data);
+    dispatch(addItemToCart(data));
     navigate("/cart");
   };
 
@@ -152,8 +156,8 @@ export default function ProductDetails() {
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
-                src={products.product?.imageUrl}
-                alt={product.images[0].alt}
+                src={products?.product?.imageUrl}
+                alt=""
                 className="h-full w-full object-cover object-center"
               />
             </div>
