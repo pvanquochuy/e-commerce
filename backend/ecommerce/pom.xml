@@ -69,7 +69,15 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--		jwt token-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!--		jwt token-->
 
 
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->

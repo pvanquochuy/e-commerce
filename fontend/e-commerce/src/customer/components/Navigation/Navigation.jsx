@@ -30,8 +30,6 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  console.log("log auth: ", auth);
-
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
