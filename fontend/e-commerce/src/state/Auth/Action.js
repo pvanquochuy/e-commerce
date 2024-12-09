@@ -46,11 +46,12 @@ export const login = (userData) => async (dispatch) => {
     const response = await axios.post(`${API_BASE_URL}/auth/login`, userData);
     const user = response.data;
     console.log("user", user);
+    console.log("API response:", response.data);
 
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
+      dispatch(loginSuccess({ jwt: user.jwt, user: user }));
     }
-    dispatch(loginSuccess());
   } catch (error) {
     dispatch(loginFailure(error.message));
   }
@@ -70,8 +71,9 @@ export const getUser = (jwt) => async (dispatch) => {
       },
     });
     const user = response.data;
-    console.log("user", user);
-    dispatch(getUserSuccess(user.jwt));
+    console.log("API user response:", user); // Kiểm tra dữ liệu trả về từ API
+
+    dispatch(getUserSuccess(user));
   } catch (error) {
     dispatch(getUserFailure(error.message));
   }

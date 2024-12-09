@@ -30,6 +30,8 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  console.log("log auth: ", auth);
+
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -51,6 +53,10 @@ export default function Navigation() {
   };
 
   useEffect(() => {
+    console.log("JWT:", jwt);
+  }, [jwt]);
+
+  useEffect(() => {
     if (jwt) {
       dispatch(getUser(jwt));
     }
@@ -63,7 +69,7 @@ export default function Navigation() {
     if (location.pathname === "/login" || location.pathname === "/register") {
       navigate(-1);
     }
-  });
+  }, [auth.user]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -413,7 +419,7 @@ export default function Navigation() {
                           cursor: "pointer",
                         }}
                       >
-                        {auth?.firstName[0].toUpperCase()}
+                        {auth?.user.firstName[0].toUpperCase()}
                       </Avatar>
 
                       <Menu
@@ -441,7 +447,7 @@ export default function Navigation() {
                       onClick={handleOpen}
                       className="text-sm font-medium text-gray-700 hover:text-gray-800"
                     >
-                      Signin
+                      Đăng nhập
                     </Button>
                   )}
                 </div>
