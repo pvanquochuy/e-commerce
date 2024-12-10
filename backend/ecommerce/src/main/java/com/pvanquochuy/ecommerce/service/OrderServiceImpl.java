@@ -11,14 +11,19 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService{
-    private CartRepository cartRepository;
-    private CartService cartService;
-    private ProductService productService;
 
-    public OrderServiceImpl(CartRepository cartRepository, CartService cartService, ProductService productService) {
-        this.cartRepository = cartRepository;
+    private OrderRepository orderRepository;
+    private CartService cartService;
+    private AddressRepository addressRepository;
+    private OrderItemService orderItemService;
+    private OrderItemRepository orderItemRepository;
+
+    public OrderServiceImpl(OrderRepository orderRepository, CartService cartService, AddressRepository addressRepository, OrderItemService orderItemService, OrderItemRepository orderItemRepository) {
+        this.orderRepository = orderRepository;
         this.cartService = cartService;
-        this.productService = productService;
+        this.addressRepository = addressRepository;
+        this.orderItemService = orderItemService;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Override
