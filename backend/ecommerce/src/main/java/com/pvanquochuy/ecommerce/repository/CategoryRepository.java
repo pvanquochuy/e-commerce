@@ -9,7 +9,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Category findByName(String name);
 
-    @Query("SELECT c FROM Category c WHERE c.name =: name AND c.parentCategory.name =: parentCategoryName")
+    @Query("SELECT c FROM Category c WHERE c.name = :name AND c.parentCategory.name = :parentCategoryName")
     Category findByNameAndParent(@Param("name")String name, @Param("parentCategoryName")String parentCategoryName);
 
 

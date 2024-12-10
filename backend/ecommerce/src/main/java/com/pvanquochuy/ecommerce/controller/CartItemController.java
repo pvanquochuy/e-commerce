@@ -2,6 +2,7 @@ package com.pvanquochuy.ecommerce.controller;
 
 import com.pvanquochuy.ecommerce.exception.CartItemException;
 import com.pvanquochuy.ecommerce.exception.UserException;
+import com.pvanquochuy.ecommerce.model.CartItem;
 import com.pvanquochuy.ecommerce.model.User;
 import com.pvanquochuy.ecommerce.request.AddItemRequest;
 import com.pvanquochuy.ecommerce.response.ApiResponse;
@@ -36,16 +37,12 @@ public class CartItemController {
     }
 
     @PutMapping("/{cartItemId}")
-    @Operation(description = "add item to cart")
-    public ResponseEntity<ApiResponse> updateCartItem(@RequestBody AddItemRequest req, @RequestHeader("Authorization") String jwt) throws UserException, CartItemException{
+    @Operation(description = "update item to cart")
+    public ResponseEntity<CartItem> updateCartItem(@RequestBody CartItem cartItem, @PathVariable Long cartItemId, @RequestHeader("Authorization") String jwt) throws UserException, CartItemException{
         User user = userService.findUserProfileByJwt(jwt);
 
-//        cartItemService.add();
+        CartItem updateCartItem = cartItemService.updateCartItem(user.getId(), cartItemId, cartItem);
 
-        ApiResponse res = new ApiResponse();
-        res.setMessage("item added successfully");
-        res.setStatus(true);
-
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return new ResponseEntity<>(updateCartItem, HttpStatus.OK);
     }
 }

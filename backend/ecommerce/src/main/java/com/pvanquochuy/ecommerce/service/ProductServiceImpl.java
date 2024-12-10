@@ -3,6 +3,8 @@ package com.pvanquochuy.ecommerce.service;
 import com.pvanquochuy.ecommerce.exception.ProductException;
 import com.pvanquochuy.ecommerce.model.Category;
 import com.pvanquochuy.ecommerce.model.Product;
+import com.pvanquochuy.ecommerce.model.Rating;
+import com.pvanquochuy.ecommerce.model.User;
 import com.pvanquochuy.ecommerce.repository.CategoryRepository;
 import com.pvanquochuy.ecommerce.repository.ProductRepository;
 import com.pvanquochuy.ecommerce.request.CreateProductRequest;
@@ -55,7 +57,7 @@ public class ProductServiceImpl implements ProductService{
             Category thirdLevelCategory = new Category();
             thirdLevelCategory.setName(req.getThirdLevelCategory());
             thirdLevelCategory.setParentCategory(secondLevel);
-            thirdLevelCategory.setLevel(2);
+            thirdLevelCategory.setLevel(3);
             thirdLevel = categoryRepository.save(thirdLevelCategory);
         }
 
@@ -106,6 +108,11 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public List<Product> findAllProducts() {
+        return productRepository.findAll();
+    }
+
+    @Override
     public List<Product> findProductByCategory(String category) {
         return List.of();
     }
@@ -114,6 +121,7 @@ public class ProductServiceImpl implements ProductService{
     public Page<Product> getAllProduct(String category, List<String> colors, List<String> sizes, Integer minPrice, Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, minDiscount, sort);
+
         if(!colors.isEmpty()) {
             products = products.stream().filter(p-> colors.stream().anyMatch(c->c.equalsIgnoreCase(p.getColor())))
                     .collect(Collectors.toList());
@@ -121,7 +129,7 @@ public class ProductServiceImpl implements ProductService{
         if(stock != null){
             if(stock.equals("in_stock")){
                 products=products.stream().filter(p->p.getQuantity()>0).collect(Collectors.toList());
-            } else if (stock.equals("out_of_stock")){} {
+            } else if (stock.equals("out_of_stock")) {
                 products=products.stream().filter(p->p.getQuantity()<1).collect(Collectors.toList());
             }
         }
@@ -130,8 +138,8 @@ public class ProductServiceImpl implements ProductService{
 
         List<Product> pageContent = products.subList(startIndex, endIndex);
 
-        Page<Product> filterdProducts = new PageImpl<>(pageContent, pageable, products.size());
-        return filterdProducts;
+        Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable, products.size());
+        return filteredProducts;
 
     }
 }

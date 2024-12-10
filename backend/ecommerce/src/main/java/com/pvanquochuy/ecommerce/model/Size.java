@@ -6,9 +6,14 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class Size {
     private String name;
-    private String quantity;
+    private int quantity;
 
     public Size() {
+    }
+
+    public Size(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -19,11 +24,11 @@ public class Size {
         this.name = name;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

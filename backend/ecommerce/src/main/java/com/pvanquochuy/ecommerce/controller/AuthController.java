@@ -1,10 +1,12 @@
 package com.pvanquochuy.ecommerce.controller;
 
 import com.pvanquochuy.ecommerce.config.JwtProvider;
+import com.pvanquochuy.ecommerce.model.Cart;
 import com.pvanquochuy.ecommerce.model.User;
 import com.pvanquochuy.ecommerce.repository.UserRepository;
 import com.pvanquochuy.ecommerce.request.LoginRequest;
 import com.pvanquochuy.ecommerce.response.AuthResponse;
+import com.pvanquochuy.ecommerce.service.CartService;
 import com.pvanquochuy.ecommerce.service.CustomeUserServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +29,15 @@ public class AuthController {
     private JwtProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
     private CustomeUserServiceImpl userService;
+    private CartService cartService;
 
 
-    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomeUserServiceImpl userService) {
+    public AuthController(UserRepository userRepository, JwtProvider jwtProvider, PasswordEncoder passwordEncoder, CustomeUserServiceImpl userService, CartService cartService) {
         this.userRepository = userRepository;
         this.jwtProvider = jwtProvider;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.cartService  = cartService;
     }
 
     @PostMapping("/signup")
@@ -55,6 +59,7 @@ public class AuthController {
         crerateUser.setLastName(lastName);
 
         User savedUser = userRepository.save(crerateUser);
+        Cart cart = cartService.createCart(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
