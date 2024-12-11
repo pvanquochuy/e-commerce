@@ -47,8 +47,12 @@ public class CartServiceImpl implements CartService {
             cartItem.setPrice(price);
             cartItem.setSize(req.getSize());
 
+            // **Liên kết Cart với CartItem**
+            cartItem.setCart(cart);
+
             CartItem createdCartItem = cartItemService.createCartItem(cartItem);
             cart.getCartItems().add(createdCartItem);
+            cartRepository.save(cart); // Lưu lại cart để cập nhật quan hệ
         }
         return "Item add to card";
     }
