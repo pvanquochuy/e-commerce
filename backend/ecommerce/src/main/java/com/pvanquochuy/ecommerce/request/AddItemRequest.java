@@ -5,6 +5,8 @@ public class AddItemRequest {
     private String size;
     private int quantity;
     private Integer price;
+    private Integer discountedPrice;
+
 
     public AddItemRequest() {
     }
@@ -39,5 +41,13 @@ public class AddItemRequest {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Integer getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(Integer discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 }

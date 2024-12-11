@@ -1,10 +1,12 @@
 package com.pvanquochuy.ecommerce.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
 @Entity
 public class Cart {
     @Id
@@ -32,56 +34,28 @@ public class Cart {
     public Cart() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public Set<CartItem> getCartItems() {
-        return cartItems;
-    }
-
     public void setCartItems(Set<CartItem> cartItems) {
         this.cartItems = cartItems;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
     }
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public int getTotalItem() {
-        return totalItem;
-    }
-
     public void setTotalItem(int totalItem) {
         this.totalItem = totalItem;
     }
 
-    public int getTotalDiscountedPrice() {
-        return totalDiscountedPrice;
-    }
-
     public void setTotalDiscountedPrice(int totalDiscountedPrice) {
         this.totalDiscountedPrice = totalDiscountedPrice;
-    }
-
-    public int getDiscounte() {
-        return discounte;
     }
 
     public void setDiscounte(int discounte) {

@@ -31,7 +31,7 @@ public class CartController {
         User user = userService.findUserProfileByJwt(jwt);
         Cart cart = cartService.findUsercart(user.getId());
 
-        return new ResponseEntity<Cart>(cart, HttpStatus.OK);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
     @PutMapping("/add")

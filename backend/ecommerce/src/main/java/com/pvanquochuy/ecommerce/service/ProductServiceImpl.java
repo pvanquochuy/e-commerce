@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,7 +34,21 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Transactional
     public Product createProduct(CreateProductRequest req) {
+
+        if (req.getTopLevelCategory() == null || req.getTopLevelCategory().isBlank()) {
+            throw new IllegalArgumentException("Top-level category name is required.");
+        }
+
+        if (req.getSecondLevelCategory() == null || req.getSecondLevelCategory().isBlank()) {
+            throw new IllegalArgumentException("Second-level category name is required.");
+        }
+
+        if (req.getThirdLevelCategory() == null || req.getThirdLevelCategory().isBlank()) {
+            throw new IllegalArgumentException("Third-level category name is required.");
+        }
+
         Category topLevel = categoryRepository.findByName(req.getTopLevelCategory());
         if(topLevel == null){
             Category topLevelCategory = new Category();
