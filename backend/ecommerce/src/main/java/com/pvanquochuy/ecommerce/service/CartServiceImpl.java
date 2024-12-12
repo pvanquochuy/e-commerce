@@ -59,7 +59,12 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart findUsercart(Long userId) {
+
         Cart cart = cartRepository.findByUserId(userId);
+
+        if (cart == null){
+            throw new RuntimeException("Cart not found for user id: " + userId);
+        }
 
         int totalPrice = 0;
         int totalDiscountedPrice = 0;
