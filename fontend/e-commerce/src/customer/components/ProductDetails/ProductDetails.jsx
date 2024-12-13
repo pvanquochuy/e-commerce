@@ -97,6 +97,7 @@ export default function ProductDetails() {
   const { products } = useSelector((store) => store);
 
   console.log("-----", params.productId);
+  console.log("products data1: ", products.product.data);
 
   const handleAddToCart = () => {
     const data = { productId: params.productId, size: selectedSize.name };
@@ -156,8 +157,8 @@ export default function ProductDetails() {
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
-                src={products?.product?.imageUrl}
-                alt=""
+                src={products.product.data.imageUrl}
+                alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -179,11 +180,11 @@ export default function ProductDetails() {
             <div className="lg:col-span-2 ">
               <h1 className="text-lg lg:text-xl font-semibold text-gray-900">
                 {/* {product.name} */}
-                {products.product?.brand}
+                {products.product.data.brand}
               </h1>
               <h1 className="text-lg lg:text-xl text-gray-900 opacity-60 pt-1">
                 Causal Pull ....
-                {products.product?.title}
+                {products.product.data.title}
               </h1>
             </div>
 
@@ -192,13 +193,13 @@ export default function ProductDetails() {
               <h2 className="sr-only">Product information</h2>
               <div className="flex space-x-5 items-center text-lg lg-text-xl text-gray-900 mt-6">
                 <p className="font-semibold">
-                  {products.product?.descountedPrice}
+                  {products.product.data.discountedPrice}
                 </p>
                 <p className="opacity-50 line-through">
-                  {products.product?.price}
+                  {products.product.data.price}
                 </p>
                 <p className="text-green-600 font-semibold">
-                  {products.product?.discountedPersent}% off
+                  {products.product.data.discountPercent}% off
                 </p>
               </div>
 

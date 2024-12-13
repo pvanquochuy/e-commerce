@@ -53,6 +53,8 @@ export default function Product() {
   const dispatch = useDispatch();
   const { products } = useSelector((store) => store);
 
+  console.log("products all: ", products);
+
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
@@ -63,7 +65,7 @@ export default function Product() {
   const pageNumber = searchParams.get("page") || 1;
   const stock = searchParams.get("stock");
 
-  const handlePaginationChange = (value) => {
+  const handlePaginationChange = (event, value) => {
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("page", value);
     const query = searchParams.toString();
@@ -361,7 +363,7 @@ export default function Product() {
               <div className="lg:col-span-4 w-full">
                 <div className="flex flex-wrap justify-center bg-white py-5">
                   {products.products &&
-                    products.products?.content?.map((item) => (
+                    products.products?.map((item) => (
                       <ProductCard product={item} />
                     ))}
                 </div>

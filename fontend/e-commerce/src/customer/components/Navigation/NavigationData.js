@@ -1,7 +1,7 @@
 export const navigation = {
   categories: [
     {
-      id: "women",
+      id: "nu",
       name: "Nữ",
       featured: [
         {
@@ -23,10 +23,10 @@ export const navigation = {
       ],
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
+          id: "quan-ao",
+          name: "Quần áo",
           items: [
-            { name: "Tops", id: "top", href: `{women/clothing/tops}` },
+            { name: "Váy", id: "vay", href: `{nu/quan-ao/vay}` },
             { name: "Dresses", id: "women_dress", href: "#" },
             { name: "Women Jeans", id: "women_jeans" },
             { name: "Lengha Choli", id: "lengha_choli" },
@@ -65,7 +65,7 @@ export const navigation = {
     },
     {
       id: "men",
-      name: "Nam",
+      name: "Men",
       featured: [
         {
           name: "New Arrivals",
@@ -124,7 +124,7 @@ export const navigation = {
     },
   ],
   pages: [
-    { name: "Công Ty", id: "/" },
-    { name: "Cửa Hàng", id: "/" },
+    { name: "Company", id: "/" },
+    { name: "Stores", id: "/" },
   ],
 };
