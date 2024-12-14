@@ -19,6 +19,8 @@ const CartItem = ({ item }) => {
     dispatch(removeCartItem(item.id));
   };
 
+  console.log("item__", item);
+
   return (
     <div className="p-5 shadow-lg border rounded-md">
       <div className="flex items-center">
@@ -36,9 +38,11 @@ const CartItem = ({ item }) => {
 
           <div className="flex space-x-5 items-center  text-gray-900 pt-6">
             <p className="font-semibold">${item.price}</p>
-            <p className="opacity-50 line-through">${item.discountedPrice}</p>
+            <p className="opacity-50 line-through">
+              ${item.product.discountedPrice}
+            </p>
             <p className="text-green-600 font-semibold">
-              {item.discountPresent}% off
+              {item.product.discountPercent}% off
             </p>
           </div>
         </div>

@@ -19,11 +19,13 @@ const Cart = () => {
     dispatch(getCart());
   }, [cart.updateCartItem, cart.deleteCartItem]);
 
+  console.log("cart___", cart);
+
   return (
     <div>
       <div className="lg:grid grid-cols-3 lg:px-16 relative">
         <div className="col-span-2">
-          {cart.cart?.cartItems.map((item) => (
+          {cart.cartItems.map((item) => (
             <CartItem item={item} />
           ))}
         </div>
@@ -37,12 +39,14 @@ const Cart = () => {
             <div className="space-y-3 font-semibold mb-10">
               <div className="flex justify-between pt-3 text-black">
                 <span>Price</span>
-                <span>${cart.cart?.totalPrice}</span>
+                <span>${cart.totalPrice * cart.totalItem}</span>
               </div>
 
               <div className="flex justify-between pt-3 ">
                 <span>Discount</span>
-                <span className=" text-green-600">-${cart.cart?.discount}</span>
+                <span className=" text-green-600">
+                  -${cart.totalDiscountedPrice}
+                </span>
               </div>
 
               <div className="flex justify-between pt-3 ">
@@ -53,7 +57,7 @@ const Cart = () => {
               <div className="flex justify-between pt-3 ">
                 <span>Total Amount</span>
                 <span className="text-green-600  font-bold">
-                  {cart.cart?.totalDiscountPrice}
+                  {cart.totalPrice * cart.totalItem - cart.totalDiscountedPrice}
                 </span>
               </div>
             </div>

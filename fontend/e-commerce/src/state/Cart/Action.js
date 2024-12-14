@@ -20,21 +20,22 @@ export const getCart = () => async (dispatch) => {
   try {
     const { data } = await api.get(`/api/cart/`);
     dispatch({ type: GET_CART_SUCCESS, payload: data });
-    console.log("cart ", data);
+    console.log("cart api__", data);
   } catch (error) {
     dispatch({ type: GET_CART_FAILURE, payload: error.message });
   }
 };
 
 export const addItemToCart = (reqData) => async (dispatch) => {
+  console.log("req data__: ", reqData);
   dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
-
   try {
     const { data } = await api.put("/api/cart/add", reqData);
     dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
     console.log("add item to cart ", data);
   } catch (error) {
     dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: error.message });
+    console.log("error add item to cart ", error);
   }
 };
 

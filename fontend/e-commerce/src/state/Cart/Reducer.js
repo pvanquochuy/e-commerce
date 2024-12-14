@@ -15,9 +15,13 @@ import {
 
 const initialState = {
   cart: null,
+  cartItems: [],
+  totalPrice: 0,
+  totalItem: 0,
+  totalDiscountedPrice: 0,
+  discounte: 0,
   loading: false,
   error: null,
-  cartItems: [],
 };
 
 export const cartReducer = (state = initialState, action) => {
@@ -46,6 +50,10 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: action.payload.cartItems,
+        totalPrice: action.payload.totalPrice,
+        totalItem: action.payload.totalItem,
+        totalDiscountedPrice: action.payload.totalDiscountedPrice,
+        discounte: action.payload.discounte,
         loading: false,
       };
 
