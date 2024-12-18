@@ -1,5 +1,6 @@
 package com.pvanquochuy.ecommerce.controller;
 
+import com.pvanquochuy.ecommerce.exception.CartItemException;
 import com.pvanquochuy.ecommerce.exception.ProductException;
 import com.pvanquochuy.ecommerce.exception.UserException;
 import com.pvanquochuy.ecommerce.model.Cart;
@@ -37,7 +38,8 @@ public class CartController {
     @PutMapping("/add")
 //    @Operation(description = "add item to cart")
     public ResponseEntity<ApiResponse> addItemToCart(@RequestBody AddItemRequest req, @RequestHeader("Authorization") String jwt
-                                                     )throws UserException, ProductException{
+
+                                                     ) throws UserException, ProductException, CartItemException {
         User user = userService.findUserProfileByJwt(jwt);
 
         cartService.addCartItem(user.getId(), req);

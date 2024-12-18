@@ -37,21 +37,23 @@ public class CartItemServiceImpl implements CartItemService{
     @Override
     public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws CartItemException, UserException {
         CartItem item = findCartItemById(id);
+
         User user = userService.findUserById(item.getUserId());
 
-        if(user.getId().equals(userId)){
-            item.setQuantity(item.getQuantity());
-            item.setPrice(item.getQuantity()*item.getProduct().getPrice());
-            item.setDiscountedPrice(item.getProduct().getDiscountedPrice()*item.getQuantity());
+        if (user.getId().equals(userId)) {
+            item.setQuantity(cartItem.getQuantity());
+
+            item.setPrice(item.getQuantity() * item.getProduct().getPrice());
+            item.setDiscountedPrice(item.getQuantity() * item.getProduct().getDiscountedPrice());
         }
+
         return cartItemRepository.save(item);
 
     }
 
     @Override
-    public CartItem isCCarttemExist(Cart cart, Product product, String size, Long userId) {
-        CartItem cartItem = cartItemRepository.isCartItemExist(cart, product, size, userId);
-        return cartItem;
+    public CartItem isCarttemExist(Cart cart, Product product, String size, Long userId) {
+        return cartItemRepository.isCartItemExist(cart, product, size, userId);
     }
 
     @Override

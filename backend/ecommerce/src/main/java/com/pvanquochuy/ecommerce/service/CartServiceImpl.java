@@ -1,6 +1,8 @@
 package com.pvanquochuy.ecommerce.service;
 
+import com.pvanquochuy.ecommerce.exception.CartItemException;
 import com.pvanquochuy.ecommerce.exception.ProductException;
+import com.pvanquochuy.ecommerce.exception.UserException;
 import com.pvanquochuy.ecommerce.model.Cart;
 import com.pvanquochuy.ecommerce.model.CartItem;
 import com.pvanquochuy.ecommerce.model.Product;
@@ -30,13 +32,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
+    public String addCartItem(Long userId, AddItemRequest req) throws ProductException, CartItemException, UserException {
         Cart cart = cartRepository.findByUserId(userId);
+
         Product product = productService.findProductById(req.getProductId());
 
-        CartItem isPresent = cartItemService.isCCarttemExist(cart, product, req.getSize(), userId);
+        CartItem isPresent = cartItemService.isCarttemExist(cart, product, req.getSize(), userId);
 
-        if(isPresent == null){
+        if (isPresent == null) {
             CartItem cartItem = new CartItem();
             cartItem.setProduct(product);
             cartItem.setQuantity(req.getQuantity());
@@ -47,14 +50,24 @@ public class CartServiceImpl implements CartService {
             cartItem.setPrice(price);
             cartItem.setSize(req.getSize());
 
-            // **Liên kết Cart với CartItem**
             cartItem.setCart(cart);
 
             CartItem createdCartItem = cartItemService.createCartItem(cartItem);
             cart.getCartItems().add(createdCartItem);
-            cartRepository.save(cart); // Lưu lại cart để cập nhật quan hệ
+            cartRepository.save(cart);
+        } else {
+            int newQuantity = isPresent.getQuantity() + req.getQuantity(); // Tăng số lượng
+            isPresent.setQuantity(newQuantity);
+
+            int price = newQuantity * product.getDiscountedPrice();
+            isPresent.setPrice(price);
+
+            isPresent.setDiscountedPrice(newQuantity * product.getDiscountedPrice());
+
+            cartItemService.updateCartItem(userId, isPresent.getId(), isPresent);
         }
-        return "Item add to card";
+
+        return "Item added to cart";
     }
 
     @Override

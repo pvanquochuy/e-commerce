@@ -22,7 +22,7 @@ const CartItem = ({ item }) => {
   console.log("item__", item);
 
   return (
-    <div className="p-5 shadow-lg border rounded-md">
+    <div key={item.id} className="p-5 shadow-lg border rounded-md">
       <div className="flex items-center">
         <div className="w-[5rem] lg:w-[9rem] lg:h-[9rem]">
           <img
@@ -52,13 +52,13 @@ const CartItem = ({ item }) => {
         <div className="flex items-center space-x-2">
           <IconButton
             onClick={() => handleUpdateCartItem(-1)}
-            disabled={item.quantity <= 1}
+            // disabled={item.quantity <= 1}
           >
             <RemoveCircleOutlineIcon />
           </IconButton>
-          <span className="py-1 px-7 border rounded-sm">{item.quantity}</span>
+          {/* <span className="py-1 px-7 border rounded-sm">{item.quantity}</span> */}
           <IconButton
-            onClick={() => handleUpdateCartItem(+1)}
+            onClick={() => handleUpdateCartItem(1)}
             sx={{ color: "RGB(145 85 253)" }}
           >
             <AddCircleOutlineIcon />
