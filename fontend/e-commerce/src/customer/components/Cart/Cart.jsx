@@ -25,7 +25,7 @@ const Cart = () => {
     <div>
       <div className="lg:grid grid-cols-3 lg:px-16 relative">
         <div className="col-span-2">
-          {cart.cartItems.map((item) => (
+          {cart.cartItems?.map((item) => (
             <CartItem item={item} />
           ))}
         </div>
@@ -39,14 +39,12 @@ const Cart = () => {
             <div className="space-y-3 font-semibold mb-10">
               <div className="flex justify-between pt-3 text-black">
                 <span>Price</span>
-                <span>${cart.totalPrice * cart.totalItem}</span>
+                <span>${cart.totalPrice}</span>
               </div>
 
               <div className="flex justify-between pt-3 ">
                 <span>Discount</span>
-                <span className=" text-green-600">
-                  -${cart.totalDiscountedPrice}
-                </span>
+                <span className=" text-green-600">-${cart.discounte}</span>
               </div>
 
               <div className="flex justify-between pt-3 ">
@@ -57,7 +55,7 @@ const Cart = () => {
               <div className="flex justify-between pt-3 ">
                 <span>Total Amount</span>
                 <span className="text-green-600  font-bold">
-                  {cart.totalPrice * cart.totalItem - cart.totalDiscountedPrice}
+                  {cart.totalPrice - cart.discounte}
                 </span>
               </div>
             </div>

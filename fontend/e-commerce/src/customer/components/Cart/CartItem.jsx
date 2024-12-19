@@ -22,27 +22,27 @@ const CartItem = ({ item }) => {
   console.log("item__", item);
 
   return (
-    <div key={item.id} className="p-5 shadow-lg border rounded-md">
+    <div className="p-5 shadow-lg border rounded-md">
       <div className="flex items-center">
         <div className="w-[5rem] lg:w-[9rem] lg:h-[9rem]">
           <img
             className="w-full h-full object-cover object-top"
-            src={item.product.imageUrl}
+            // src={item.product.imageUrl}
             alt=""
           />
         </div>
         <div className="ml-5 space-y-1">
-          <p className="font-semibold">{item.product.title}</p>
+          {/* <p className="font-semibold">{item.product.title}</p>
           <p className="opacity-70">Size: {item.size}</p>
-          <p className="opacity-70 mt-2">Người bán: {item.product.brand}</p>
+          <p className="opacity-70 mt-2">Người bán: {item.product.brand}</p> */}
 
           <div className="flex space-x-5 items-center  text-gray-900 pt-6">
-            <p className="font-semibold">${item.price}</p>
+            {/* <p className="font-semibold">${item.price}</p> */}
             <p className="opacity-50 line-through">
-              ${item.product.discountedPrice}
+              {/* ${item.product.discountedPrice} */}
             </p>
             <p className="text-green-600 font-semibold">
-              {item.product.discountPercent}% off
+              {/* {item.product.discountPercent}% off */}
             </p>
           </div>
         </div>

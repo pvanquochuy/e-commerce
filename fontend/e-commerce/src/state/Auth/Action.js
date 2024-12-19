@@ -27,7 +27,6 @@ export const register = (userData) => async (dispatch) => {
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
     }
-    console.log("user", user);
 
     dispatch(registerSuccess());
   } catch (error) {
@@ -45,11 +44,8 @@ export const login = (userData) => async (dispatch) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/login`, userData);
     const user = response.data;
-    console.log("user", user);
-    console.log("API response:", response.data);
 
     if (user.jwt) {
-      localStorage.setItem("jwt", user.jwt);
       dispatch(loginSuccess({ jwt: user.jwt, user: user }));
     }
   } catch (error) {

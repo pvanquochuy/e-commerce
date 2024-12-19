@@ -53,8 +53,6 @@ export default function Product() {
   const dispatch = useDispatch();
   const { products } = useSelector((store) => store);
 
-  console.log("products all: ", products);
-
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
   const colorValue = searchParams.get("color");
@@ -118,8 +116,6 @@ export default function Product() {
       pageSize: 1,
       stock: stock,
     };
-
-    console.log("Dispatching data:", data); // Debug thông tin gửi đi
 
     dispatch(findProducts(data));
   }, [
@@ -364,7 +360,7 @@ export default function Product() {
                 <div className="flex flex-wrap justify-center bg-white py-5">
                   {products.products &&
                     products.products?.map((item) => (
-                      <ProductCard product={item} />
+                      <ProductCard product={item} key={item.id} />
                     ))}
                 </div>
               </div>

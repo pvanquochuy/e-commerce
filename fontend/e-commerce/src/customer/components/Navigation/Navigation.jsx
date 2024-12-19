@@ -50,9 +50,7 @@ export default function Navigation() {
     close();
   };
 
-  useEffect(() => {
-    console.log("JWT:", jwt);
-  }, [jwt]);
+  useEffect(() => {}, [jwt]);
 
   useEffect(() => {
     if (jwt) {
